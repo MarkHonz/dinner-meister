@@ -1,0 +1,52 @@
+:root {
+	--max-width: 1100px;
+	--border-radius: 12px;
+	--font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
+		'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
+		'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+
+	--foreground-rgb: 0, 0, 0;
+	--background-start-rgb: 214, 219, 220;
+	--background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--foreground-rgb: 255, 255, 255;
+		--background-start-rgb: 0, 0, 0;
+		--background-end-rgb: 0, 0, 0;
+	}
+}
+
+$color-primary: #55c57a;
+$color-primary-light: #7ed56f;
+$color-primary-dark: #28b485;
+
+$color-secondary-light: #ffb900;
+$color-secondary-dark: #ff7730;
+
+$color-tertiary-light: #2998ff;
+$color-tertiary-dark: #5643fa;
+
+$color-grey-light-1: #f7f7f7;
+$color-grey-light-2: #eee;
+
+$color-grey-dark: #777;
+$color-white: #fff;
+$color-black: #000;
+
+$main-color: rgb(0, 128, 128);
+$var1-color: rgba(76, 166, 166, 0.5);
+$poster-color: rgba(76, 166, 166, 0.7);
+$border-color: rgb(233, 174, 40);
+$nav-color1: rgb(111, 183, 183);
+$nav-color2: rgb(76, 166, 166);
+
+// FONT:
+$default-font-size: 1.6rem;
+$default-font-color: #111;
+
+// GRID:
+$grid-width: 114rem;
+$gutter-vertical: 8rem;
+$gutter-horizontal: 6rem;

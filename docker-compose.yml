@@ -1,0 +1,27 @@
+version: '3.7'
+
+services:
+  # app:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   container_name: dinner-meister_app
+  #   ports:
+  #     - '3000:3000'
+  #   volumes:
+  #     - .:/app
+  #     - /app/node_modules
+  db:
+    image: 'postgres:16.3-alpine'
+    container_name: dinner-meister_db
+    environment:
+      POSTGRES_USER: mark
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: dinner-meister
+    ports:
+      - '5432:5432'
+    # restart: always
+    volumes:
+      - dinner-meister_db:/var/lib/postgresql/data
+volumes:
+  dinner-meister_db:

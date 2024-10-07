@@ -1,0 +1,27 @@
+@use '../abstracts' as *;
+
+#root {
+	display: grid;
+	gap: none;
+	grid-auto-rows: auto;
+	justify-content: center;
+	width: 80%;
+	margin: 0 auto;
+
+	@media (max-width: 1199px) {
+		width: 98%;
+	}
+}
+
+.page {
+	display: grid;
+	gap: none;
+	grid-template-columns: 8fr 2fr;
+	grid-template-rows: 1fr;
+	grid-template-areas: 'main side-bar';
+}
+
+// .home {
+// 	grid-template-columns: 2fr;
+// 	grid-template-rows: 1fr;
+// }

@@ -1,0 +1,63 @@
+@use '../../styles/abstracts/' as *;
+
+.main {
+}
+
+.content-box {
+	align-items: center;
+	display: flex;
+	margin: 5rem 3rem;
+	background-color: $poster-color;
+	height: 60rem;
+}
+
+.poster {
+	background-color: $color-grey-light-1;
+	display: inline-block;
+	height: fit-content;
+	width: 40%;
+	margin-left: -10rem;
+	margin-right: 5rem;
+	padding: 2rem;
+}
+
+.poster h2 {
+	font-size: 130%;
+	text-transform: capitalize;
+	margin: 0 0 1.5% 0;
+	line-height: 120%;
+}
+
+.poster h2::first-letter {
+	font-size: 133%;
+	text-transform: uppercase;
+}
+
+main table {
+	border: solid 2px rgb(36, 36, 36);
+	border-collapse: collapse;
+	min-width: 55%;
+	min-height: 90%;
+	cursor: default;
+	font-size: 90%;
+	font-weight: bold;
+	font-weight: 1000;
+	margin: 3rem;
+}
+
+main table tr th,
+main table tr td {
+	border-bottom: solid 2px rgb(36, 36, 36);
+	border-radius: 0;
+	padding: 3.5%;
+	text-transform: capitalize;
+}
+
+main table tr:focus,
+main table tr:active,
+main table tr:hover,
+main table tr td:hover,
+main table tr th {
+	color: rgb(241, 241, 241);
+	background-color: $main-color;
+}
