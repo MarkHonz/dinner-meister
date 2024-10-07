@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 import { useFormState } from 'react-dom';
-import { redirect, useRouter } from 'next/navigation';
+import { /* redirect, */ useRouter } from 'next/navigation';
 
 import styles from './modal-launcher.module.scss';
 import FormSubmit from '@/utility/form-submit';
@@ -24,12 +24,14 @@ export default function ModalLauncher({ formMode }) {
 		if (!modalRef.current) {
 			return;
 		}
-		modalRef.current.hasAttribute('open')
-			? modalRef.current.close()
-			: modalRef.current.showModal();
+		if (modalRef.current.hasAttribute('open')) {
+			modalRef.current.close();
+		} else {
+			modalRef.current.showModal();
+		}
 		// redirect('/account');
 		// router.back();
-		// router.push('/account');
+		router.push('/account');
 	};
 
 	return (
@@ -60,11 +62,7 @@ export default function ModalLauncher({ formMode }) {
 						<label htmlFor="password">Password</label>
 						<input type="password" name="password" id="password" />
 
-						<FormSubmit
-							toggleModal={toggleModal}
-							formMode={formMode}
-							ref={formRef}
-						/>
+						<FormSubmit formMode={formMode} ref={formRef} />
 
 						<button onClick={toggleModal}>Close</button>
 

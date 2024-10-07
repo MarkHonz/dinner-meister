@@ -4,8 +4,6 @@ import { redirect } from 'next/navigation';
 export default async function AdminPage() {
 	const result = await verifyAuthSession();
 
-	console.log('result:', result);
-
 	if (result.user == null) {
 		return redirect('/sign-in');
 	}

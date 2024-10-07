@@ -1,8 +1,16 @@
-import DialogLauncher from '@/utility/dialog-launcher';
+// import DialogLauncher from '@/utility/dialog-launcher';
 import ModalLauncher from '@/utility/modal-launcher';
-import ModelContent2 from '@/components/model-content2';
+// import ModelContent2 from '@/components/model-content2';
 
-export default function SignInPage({ searchParams }) {
+interface SearchParams {
+	formMode?: string;
+}
+
+export default function SignInPage({
+	searchParams,
+}: {
+	searchParams: SearchParams;
+}) {
 	const formMode = searchParams.formMode || 'login';
 
 	return (

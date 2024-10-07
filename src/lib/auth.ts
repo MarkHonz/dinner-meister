@@ -2,7 +2,6 @@ import { Lucia } from 'lucia';
 import { PrismaAdapter } from '@lucia-auth/adapter-prisma';
 import { cookies } from 'next/headers';
 import { db } from './user-db';
-import { error } from 'console';
 
 const adapter = new PrismaAdapter(db.session, db.user);
 
@@ -13,7 +12,7 @@ export const lucia = new Lucia(adapter, {
 			secure: process.env.NODE_ENV === 'production',
 		},
 	},
-	getUserAttributes: (attributes) => {
+	getUserAttributes: (attributes: { role?: string; email?: string }) => {
 		return {
 			role: attributes.role,
 			email: attributes.email,
@@ -22,7 +21,7 @@ export const lucia = new Lucia(adapter, {
 	},
 });
 
-export const createAuthSession = async (userId) => {
+export const createAuthSession = async (userId: string) => {
 	const session = await lucia.createSession(userId, {}); // Create a session for the user
 	const sessionCookie = lucia.createSessionCookie(session.id); // Create a session cookie
 	// Set the session cookie
@@ -72,7 +71,9 @@ export const verifyAuthSession = async () => {
 				sessionCookie.attributes
 			);
 		}
-	} catch (error) {}
+	} catch (error) {
+		console.error('Cookie Error:', error);
+	}
 
 	return result;
 };
