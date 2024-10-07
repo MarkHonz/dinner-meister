@@ -1,0 +1,95 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id        String   @id @unique @default(cuid())
+  password  String
+  email     String   @unique
+  role      Role     @default(USER) // This is an enum attribute with a default value
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  profile   Profile? // This is a one-to-one relation
+  sessions  Session? // This is a one-to-one relation
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade) // This is a one-to-one relation
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+}
+
+model Profile {
+  id        String   @id @default(cuid())
+  name      String
+  photo     String?
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade) // This is a one-to-one relation
+  userId    String   @unique // This is a foreign key
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  recipes   Recipe[] // This is a one-to-many relation
+}
+
+model Recipe {
+  id           String       @id @default(cuid())
+  title        String
+  ingredients  Ingredient[] //This is a many-to-many relation
+  instructions String[]
+  photo        String?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  createdBy    Profile      @relation(fields: [createdById], references: [id]) // This is a many-to-one relation
+  createdById  String // This is a foreign key
+}
+
+model Ingredient {
+  id               String             @id @default(cuid())
+  name             String
+  description      String
+  recipes          Recipe[] // This is a many-to-many relation
+  supplier         Supplier           @relation(fields: [supplierId], references: [id]) // This is a many-to-one relation
+  supplierId       String             @unique // This is a foreign key
+  ingredientAmount IngredientAmount[]
+  IngredientUnit   IngredientUnit[]
+}
+
+model IngredientAmount {
+  id             String           @id @default(cuid())
+  name           String
+  amount         Decimal
+  IngredientUnit IngredientUnit[]
+  ingredient     Ingredient[]
+}
+
+model IngredientUnit {
+  id               String             @id @default(cuid())
+  name             String
+  unit             String
+  ingredientAmount IngredientAmount[]
+  ingredient       Ingredient[]
+}
+
+model Supplier {
+  id          String       @id @default(cuid())
+  name        String       @unique
+  ingredients Ingredient[] // This is a one-to-many relation
+  ingedientId String       @unique // This is a foreign key
+}
